@@ -15,23 +15,23 @@ const getById = async (id) => {
   return product;
 };
 
-const create = async ({ name, quantity }) => {
-  const query = `
-    INSERT INTO StoreManager.products
-      (name, quantity)
-    VALUES
-      (?, ?);
-  `;
-  const [product] = await DB.execute(query, [name, quantity]);
-  return {
-    id: product.insertId,
-    name,
-    quantity,
-  };
-};
+// const create = async ({ name, quantity }) => {
+//   const query = `
+//     INSERT INTO StoreManager.products
+//       (name, quantity)
+//     VALUES
+//       (?, ?);
+//   `;
+//   const [product] = await DB.execute(query, [name, quantity]);
+//   return {
+//     id: product.insertId,
+//     name,
+//     quantity,
+//   };
+// };
 
 module.exports = {
   getAll,
   getById,
-  create,
+  // create,
 };

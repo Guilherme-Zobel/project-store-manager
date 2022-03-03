@@ -23,6 +23,10 @@ const create = async ({ name, quantity }) => {
       (?, ?);
   `;
   const [product] = await DB.execute(query, [name, quantity]);
+
+  if (!product) {
+    return false;
+  }
   return {
     id: product.insertId,
     name,

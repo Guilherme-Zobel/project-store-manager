@@ -1,7 +1,7 @@
-const BD = require('./connection');
+const DB = require('./connection');
 
 const getAll = async () => {
-  const [sales] = await BD.execute(`
+  const [sales] = await DB.execute(`
     SELECT
       s.id AS saleId,
       s.date,
@@ -13,7 +13,7 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const [sale] = await BD.execute(`
+  const [sale] = await DB.execute(`
   SELECT
     s.date,
     sp.product_id AS productId,

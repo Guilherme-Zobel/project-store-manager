@@ -140,4 +140,11 @@ describe('MODEL - PRODUCTS TEST', () => {
       })
     })
   })
+  describe('Verificação ao criar um produto', () => {
+      
+    const mockProductData = {
+      name: 'Martelo de Thor',
+      quantity:  10
+    };
+  })
 })

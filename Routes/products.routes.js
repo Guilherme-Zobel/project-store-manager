@@ -10,6 +10,7 @@ products.get('/:id', controllersProducts.getById);
 products.post('/', validate.validationName, validate.validationQuantityProduct,
 controllersProducts.create);
 
-products.put('/:id', validate.validationName, validate.validationQuantityProduct); 
+products.put('/:id', validate.validationName,
+validate.validationQuantityProduct, controllersProducts.update); 
 
 module.exports = products;

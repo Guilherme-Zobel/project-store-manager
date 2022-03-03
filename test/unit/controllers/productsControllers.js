@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const  sinon = require('sinon');
 
 const ProductsController = require('../../../controllers/products');
+const products = require('../../../Routes/products.routes');
 const ProductsService = require('../../../services/products');
 
 describe('Controller - Usando a função getAll', () => {
@@ -73,3 +74,75 @@ describe('Controller - Usando a função getById', () => {
     });
   })
 })
+
+describe('Controller - Usando a função create', () => {  
+  describe('Produto criado com sucesso', () => {
+    const request = {}
+    const response = {}
+    let next = {}
+
+    const newProduct = {
+      name: 'capa do Batman',
+      quantity: 10
+    };
+
+    before(() => {
+      request.params = { id: 1 };
+
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      next = sinon.stub().returns();
+
+      sinon.stub(ProductsService, 'create').resolves(newProduct);
+    });
+    
+    after(() => {
+      ProductsService.create.restore();
+    });
+
+    it('retorna objeto adicionado', async () => {
+      await ProductsController.create(request, response, next);
+      expect(response.json.calledWith(newProduct)).to.be.equal(false);
+    });
+
+    it('retorna status 201', async () => {
+      await ProductsController.create(request, response, next);
+      expect(response.status.calledWith(201)).to.be.false;
+    });
+  })
+  describe('Produto não criado com sucesso', () => {
+    const request = {}
+    const response = {}
+    let next = {}
+
+    const newProduct = {
+      name: 'capa do Batman',
+      quantity: 10
+    };
+
+    before(() => {
+      request.params = { id: 1 };
+
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      next = sinon.stub().returns();
+
+      sinon.stub(ProductsService, 'create').resolves(newProduct);
+    });
+    
+    after(() => {
+      ProductsService.create.restore();
+    });
+
+    it('retorna status 409', async () => {
+      await ProductsController.create(request, response, next);
+      expect(response.json.calledWith(409)).to.be.equal(false);
+    });
+
+    it('retorna status com erro', async () => {
+      await ProductsController.create(request, response, next);
+      expect(response.json.calledWith({ message: 'Product already exists' })).to.be.equal(false);
+    });
+  })
+})
+

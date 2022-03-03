@@ -82,4 +82,24 @@ describe('SERVICE - PRODUCTS ID TEST', () => {
       });
     })
   })
+  describe('Verificação ao criar um produto', () => {
+    describe('objeto criado', () => {
+      const mockExecute = {
+        name: 'Martelo de Thor',
+        quantity:  10
+      }
+      before(() => {
+        sinon.stub(ProductModel, 'create').resolves(mockExecute);
+      })
+      after(() => {
+        ProductModel.create.restore();
+      })
+
+      it('retorna um objeto criado no Banco de Dados', async () => {
+        const reponse = await ProductService.create(mockExecute);
+
+        expect(reponse).to.be.an('object');
+      })
+    })
+  })
 })

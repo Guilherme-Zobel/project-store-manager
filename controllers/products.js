@@ -67,9 +67,16 @@ const getById = async (req, res, next) => {
     }
   }; 
 
+  const exclude = async (req, res, _next) => {
+    const { id } = req.params;
+    const excludeProduct = await ServiceProduct.exclude(id);
+    if (!excludeProduct) return res.status(404).json({ message: 'Product not found' });
+    return res.status(204).end();
+  };
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  exclude,
 };

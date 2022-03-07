@@ -11,6 +11,8 @@ products.post('/', validate.validationName, validate.validationQuantityProduct,
 controllersProducts.create);
 
 products.put('/:id', validate.validationName,
-validate.validationQuantityProduct, controllersProducts.update); 
+validate.validationQuantityProduct, controllersProducts.update);
+
+products.delete('/:id', controllersProducts.exclude);
 
 module.exports = products;

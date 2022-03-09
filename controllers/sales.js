@@ -22,7 +22,20 @@ const getById = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const sale = req.body[0];
+    const updateSale = await ServiceSales.update(id, sale.productId, sale.quantity);
+    
+      return res.status(200).json(updateSale);
+    } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   getAll,
   getById,
+  update,
 };

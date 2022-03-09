@@ -9,6 +9,7 @@ sales.get('/:id', controllersSales.getById);
 
 sales.post('/', validate.validationProductId, validate.valiadationQuantitySales);
 
-sales.put('/:id', validate.validationProductId, validate.valiadationQuantitySales);
+sales.put('/:id', validate.validationProductId,
+validate.valiadationQuantitySales, controllersSales.update);
 
 module.exports = sales;

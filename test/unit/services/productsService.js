@@ -19,12 +19,12 @@ describe('SERVICE - PRODUCTS TEST', () => {
     });
 
     it('Retorna um objeto', async () => {
-      const response = await ProductService.getAll();
+      const response = await ProductModel.getAll();
       
       expect(response).to.be.an('object')
     })
     it('Verificação do objeto se existe as propriedades "id", "name", "quantity"', async () => {
-      const response = await ProductService.getAll();
+      const response = await ProductModel.getAll();
       expect(response).to.include.all.keys('id', 'name', 'quantity');
     })
     it('verifica se o objeto não está vazio', async () => {
@@ -34,6 +34,7 @@ describe('SERVICE - PRODUCTS TEST', () => {
     })
   })
 })
+
 describe('SERVICE - PRODUCTS ID TEST', () => {
   describe('Verificação do objeto na camada Service', () => {
     before(() => {
@@ -48,12 +49,12 @@ describe('SERVICE - PRODUCTS ID TEST', () => {
       ProductModel.getById.restore();
     });
     
-    it('Retorna um objeto', async () => {
+    it('Retorna um array', async () => {
       const response = await ProductService.getById();
       expect(response).to.be.an('array')
     })
 
-    it('verifica se o objeto não está vazio', async () => {
+    it('verifica se o array não está vazio', async () => {
       const response = await ProductService.getById(1);
       expect(response).to.be.not.empty;
     })

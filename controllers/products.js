@@ -14,7 +14,6 @@ const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [product] = await ServiceProduct.getById(id);
-  
     if (product.code) {
       return res.status(product.code).json({
         message: product.err,
@@ -31,7 +30,9 @@ const getById = async (req, res, next) => {
     try {
       const { name, quantity } = req.body;
       const ListProducts = await ServiceProduct.getAll();
-
+      // console.log(req.body);
+      // console.log(ListProducts);
+      console.log(ListProducts[0]);
       if (ListProducts.some((p) => p.name === name)) {
         return res.status(409).json({
           message: 'Product already exists',
